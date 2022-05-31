@@ -1,9 +1,48 @@
 import random
 
+class GuessingGame:
+    def __init__(self, answer, last_guess, last_result):
+        self.answer = answer
+        self.last_guess = last_guess
+        self.last_result = last_result
 
+    def __str__(self):
+        return (f"The answer is {self.answer}, the last guess was {self.last_guess}, and the last result was {self.last_result}")
+
+    #create guess method
+    def guess(self):
+        if self.last_guess > self.answer:
+            return 'high'
+        elif self.last_guess < self.answer:
+            return 'low'
+        else:
+            return 'correct'
+
+    #created solved method
+    def solved(self):
+        return self.last_result == 'correct'
+
+
+# -------------- DRIVER CODE -----------------
+game = GuessingGame(random.randint(1,100), None, None)
+
+while game.solved() == False:
+    if game.last_guess != None: 
+        print(f"Oops! Your last guess \"{game.last_guess}\" was {game.last_result}.")
+        print("")
+        #print(game.__str__())
+  
+    game.last_guess  = int(input("Enter your guess: "))
+    game.last_result = game.guess()
+
+
+print(f"{game.last_guess} was correct!")
+
+"""
 class GuessingGame:
     def __init__(self, answer):
         self.answer = answer
+
 
     #create guess
     def guess(self, user_guess):
@@ -21,7 +60,7 @@ class GuessingGame:
         return False
 
 
-# ----- DRIVER CODE -----
+# ----- DRIVER CODE -----------------
 game = GuessingGame(random.randint(1,100))
 last_guess  = None
 last_result = None
@@ -37,4 +76,4 @@ while game.solved() == False:
 
 
 print(f"{last_guess} was correct!")
-
+"""
