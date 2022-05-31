@@ -6,18 +6,16 @@ class GuessingGame:
         self.answer = answer
 
     #create guess
-    @classmethod
-    def guess(cls, user_guess):
-        if int(user_guess) > game.answer:
+    def guess(self, user_guess):
+        if user_guess > self.answer:
             return 'high'
-        elif int(user_guess) < game.answer:
+        elif user_guess < self.answer:
             return 'low'
         else:
             return 'correct'
 
     #created solved
-    @classmethod
-    def solved(cls):
+    def solved(self):
         if last_result == 'correct':
             return True
         return False
@@ -28,13 +26,13 @@ game = GuessingGame(random.randint(1,100))
 last_guess  = None
 last_result = None
 
-#print(game.answer)
+print(game.answer)
 while game.solved() == False:
     if last_guess != None: 
         print(f"Oops! Your last guess \"{last_guess}\" was {last_result}.")
         print("")
   
-    last_guess  = input("Enter your guess: ")
+    last_guess  = int(input("Enter your guess: "))
     last_result = game.guess(last_guess)
 
 
